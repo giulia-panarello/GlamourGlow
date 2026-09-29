@@ -31,7 +31,6 @@ public class ProductManagement {
 
     public static void viewprodotto(HttpServletRequest request, HttpServletResponse response) {
 
-        //System.out.println("SONO NEL CONTROLLER");
         DAOFactory sessionDAOFactory= null;
         DAOFactory daoFactory = null;
         Utente loggedUser =null;
@@ -54,21 +53,13 @@ public class ProductManagement {
             daoFactory.beginTransaction();
             ProdottoDAO prodottoDAO = daoFactory.getProdottoDAO();
 
-            // recupero parametro
            int id = Integer.parseInt(request.getParameter("id"));
 
-
-            // Una volta ottenuto l'ID, viene utilizzato il ProdottoDAO per recuperare i dettagli del prodotto dal database
-            //Il risultato, ovvero il prodotto, viene memorizzato nella variabile prodotto
             Prodotto prodotto = prodottoDAO.findById(id);
-
-
-
 
             daoFactory.commitTransaction();
             sessionDAOFactory.commitTransaction();
 
-            // richiesta attributi per passarli alla jsp
             request.setAttribute("loggedOn",loggedUser!=null);
             request.setAttribute("loggedUser", loggedUser);
             request.setAttribute("applicationMessage", applicationMessage);
