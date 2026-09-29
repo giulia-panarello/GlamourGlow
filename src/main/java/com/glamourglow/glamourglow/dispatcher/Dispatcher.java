@@ -27,7 +27,6 @@ public class Dispatcher extends HttpServlet {
 
             if (controllerAction==null) controllerAction="HomeManagement.viewhome";
 
-            System.out.println("Guarda dispatcher controllerAction:"+ controllerAction);
 
             String[] splittedAction=controllerAction.split("\\.");
             Class<?> controllerClass=Class.forName("com.glamourglow.glamourglow.controller."+splittedAction[0]);
@@ -36,7 +35,7 @@ public class Dispatcher extends HttpServlet {
             controllerMethod.invoke(null,request,response);
 
             String viewUrl=(String)request.getAttribute("viewUrl");
-            System.out.println("guardaUrl "+"jsp/"+viewUrl+".jsp");
+
             RequestDispatcher view=request.getRequestDispatcher("jsp/"+viewUrl+".jsp");
             view.forward(request,response);
 
