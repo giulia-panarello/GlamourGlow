@@ -76,10 +76,10 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 2000);
             padding: 40px;
             width: 400px;
-            position: relative; /* Imposta il contenitore come riferimento per il bottone assoluto */
+            position: relative;
             text-align: center;
-            margin-top: 120px; /* Spazio per l'header fisso */
-            height: 400px; /* Altezza fissa per il contenitore */
+            margin-top: 120px;
+            height: 400px;
             border: 3px solid #6A5ACD;
         }
 
@@ -180,11 +180,11 @@
 </head>
 <body>
 
-<!-- Header fisso con logo e icona Home -->
+
 <div class="header">
     <div class="logo-container">
         <img src="<%= request.getContextPath() %>/images/logo.png" alt="Logo">
-        <h1>GLAMOURGLOW</h1> <!-- Questo titolo non avrà la linea sotto -->
+        <h1>GLAMOURGLOW</h1>
     </div>
     <div class="home-icon">
         <a href="Dispatcher?controllerAction=HomeManagement.viewhome">
@@ -194,7 +194,7 @@
 </div>
 
 <div class="container">
-    <h1>Ricarica il tuo portafoglio</h1> <!-- Questo titolo avrà la linea sotto -->
+    <h1>Ricarica il tuo portafoglio</h1>
 
     <form action="Dispatcher" method="post">
         <input type="hidden" name="controllerAction" value="UserManagement.ricarica"/>
@@ -205,7 +205,6 @@
 
         </div>
 
-        <!-- Bottone fissato in basso -->
         <button type="submit">Ricarica</button>
     </form>
 

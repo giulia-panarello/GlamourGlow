@@ -173,7 +173,7 @@
 
         .quantity-label-container {
             display: flex;
-            align-items: center;  /* Allinea verticalmente gli elementi */
+            align-items: center;
             margin-bottom: 10px;
         }
 
@@ -186,7 +186,7 @@
 
         .quantity-container {
             display: flex;
-            align-items: center;  /* Allinea gli input e i pulsanti nella stessa riga */
+            align-items: center;
         }
 
         .quantity-container button {
@@ -204,17 +204,17 @@
 
 
         .quantity-container button:hover {
-            background-color: #5B4ACD; /* Colore di sfondo al passaggio del mouse */
+            background-color: #5B4ACD;
         }
 
         input[type="number"]::-webkit-inner-spin-button,
         input[type="number"]::-webkit-outer-spin-button {
-            -webkit-appearance: none; /* Rimuove le frecce in Chrome/Safari */
-            margin: 0; /* Rimuove margini */
+            -webkit-appearance: none;
+            margin: 0;
         }
 
         input[type="number"] {
-            -moz-appearance: textfield; /* Rimuove le frecce in Firefox */
+            -moz-appearance: textfield;
         }
 
         body {
@@ -222,8 +222,8 @@
             padding: 0;
             font-family: Arial, sans-serif;
             background-color: pink;
-            overflow: hidden; /* Impedisci lo scroll sull'intero body */
-            height: 100vh; /* Imposta l'altezza totale della pagina */
+            overflow: hidden;
+            height: 100vh;
             display: flex;
             flex-direction: column;
         }
@@ -276,7 +276,7 @@
             padding: 10px 20px;
             background-color: #E6E6FA;
             border-top: 1px solid #ddd;
-            margin-top: auto; /* Assicura che il totale sia sempre allineato in basso */
+            margin-top: auto;
         }
 
         .messaggio {
@@ -301,7 +301,7 @@
 </head>
 <body>
 
-<!-- Header con logo e icona Home -->
+
 <div class="header">
     <div class="logo-container">
         <img src="<%= request.getContextPath() %>/images/logo.png" alt="Logo">
@@ -314,7 +314,7 @@
     </div>
 </div>
 
-<!-- Contenitore del carrello -->
+
 <div class="cart-container">
     <h2 class="cart-header">
         Il Tuo Carrello  <img src="<%= request.getContextPath() %>/images/cart.png" alt="Carrello" style="width: 40px; height: 40px; vertical-align: middle; margin-right: 10px;">
@@ -385,9 +385,9 @@
                 i++;
             }
         %>
-    </div> <!-- Fine cart-items -->
+    </div>
 
-    <!-- Sezione Totale del Carrello -->
+
     <div class="total-container">
         <span>Totale Carrello:</span>
         <span id="totcarrello"><%= String.format("%.2f", totaleCarrello) %> €</span>
@@ -402,7 +402,7 @@
 </div>
 </div>
 
-<!-- Bottone per il checkout -->
+
 <%
     if (elementi != null && !elementi.isEmpty()) {
 %>
@@ -415,7 +415,7 @@
 
 <script>
     $(document).ready(function () {
-        // Inizializza la variabile j, che rappresenterà il numero di elementi nel carrello
+
         let j = 0;
         <% if (elementi == null) { %>
         j = 0;
@@ -423,9 +423,7 @@
         j = <%= elementi.size() %>;
         <% } %>
 
-        // Il totale del carrello (totcarrello) viene estratto dal testo di un elemento HTML con ID totcarrello e convertito in un numero decimale
-        // La variabile k viene inizializzata con il valore di j e rappresenta probabilmente un contatore per tracciare gli elementi del carrello
-        // variabileausiliaria è un array inizializzato vuoto e utilizzato più avanti per gestire casi specifici di input non validi.
+
 
         let totcarrello = parseFloat($("#totcarrello").text().replace(' €', ''));
 
@@ -434,35 +432,19 @@
         let variabileausiliaria = [];
         for (let i = 0; i < j; i++) {
 
-            // Per ogni elemento del carrello:
-            // qtamag rappresenta la quantità massima disponibile per il prodotto
-            // qtaInput è il campo di input per modificare la quantità
-            //  stock mostra la disponibilità in magazzino
-            // elemento è l'intero elemento HTML che rappresenta il prodotto
-            // pu è il prezzo unitario del prodotto
-            // prezzotot è il prezzo totale iniziale per quel prodotto
 
 
-            const qtamag = parseInt(document.getElementById("qtamag" + i).innerHTML); // Quantità massima disponibile
-            const qtaInput = $("#qta" + i); // Input per la quantità
-            const stock = document.getElementById("stock" + i); // Elemento che mostra la disponibilità in magazzino
-            const elemento = document.getElementById("cart-item" + i); // L'elemento intero del carrello
-            const pu = parseFloat(document.getElementById("pu" + i).value); // Prezzo unitario del prodotto
-            let prezzotot = parseFloat($("#prezzotot" + i).text().replace(' €', '')); // Prezzo totale iniziale
+            const qtamag = parseInt(document.getElementById("qtamag" + i).innerHTML);
+            const qtaInput = $("#qta" + i);
+            const stock = document.getElementById("stock" + i);
+            const elemento = document.getElementById("cart-item" + i);
+            const pu = parseFloat(document.getElementById("pu" + i).value);
+            let prezzotot = parseFloat($("#prezzotot" + i).text().replace(' €', ''));
 
-            // Imposta il valore iniziale per il campo "data-quantita-vecchia"
             qtaInput.data('quantita-vecchia', qtaInput.val());
-
-            // Gestione del cambiamento della quantità
-
-            // Quando l'utente modifica il valore della quantità:
-           //  nuovoValore è il valore aggiornato.
-            // vecchioValore è il valore precedente.
-            //  differenzaQuantita rappresenta la variazione rispetto al valore precedente.
-            // Se uno dei due valori non è valido (NaN), il codice applica logiche personalizzate per gestire questi casi.
             qtaInput.on('input', function () {
-                let nuovoValore = parseInt($(this).val()); // Nuovo valore della quantità
-                let vecchioValore = parseInt($(this).data('quantita-vecchia')); // Vecchio valore della quantità
+                let nuovoValore = parseInt($(this).val());
+                let vecchioValore = parseInt($(this).data('quantita-vecchia'));
                 console.log("vecchioVal:"+vecchioValore);
                 console.log("nuovoVal:"+nuovoValore);
                 let differenzaQuantita = nuovoValore - vecchioValore;
@@ -480,16 +462,14 @@
                 }
                 console.log("differenzaQta:"+differenzaQuantita);
 
-                // Verifica se la quantità inserita supera la disponibilità
                 if (nuovoValore > qtamag) {
-                    stock.classList.add("stock-alert");  // Aggiungi lo stile sbarrato
+                    stock.classList.add("stock-alert");
                     stock.classList.remove("stock-info");
                 } else {
-                    stock.classList.remove("stock-alert"); // Rimuovi lo stile sbarrato
+                    stock.classList.remove("stock-alert");
                     stock.classList.add("stock-info");
                 }
 
-                // Invia la richiesta AJAX per aggiornare la quantità nel carrello
                 if (nuovoValore > 0) {
                     if(isNaN(vecchioValore))
                     {
@@ -511,13 +491,11 @@
                                 success: function (response) {
                                     console.log("Quantità aggiornata con successo");
 
-                                    // Calcola il nuovo prezzo totale per questo prodotto
                                     let nuovoPrezzoTotale = pu * nuovoValore;
-                                    $("#prezzotot" + i).text(nuovoPrezzoTotale.toFixed(2) + ' €'); // Aggiorna il prezzo totale dell'elemento
+                                    $("#prezzotot" + i).text(nuovoPrezzoTotale.toFixed(2) + ' €');
 
-                                    // Aggiorna il totale del carrello
-                                    totcarrello += differenzaQuantita * pu; // Aggiorna il totale del carrello
-                                    $("#totcarrello").text(totcarrello.toFixed(2) + ' €'); // Visualizza il nuovo totale del carrello
+                                    totcarrello += differenzaQuantita * pu;
+                                    $("#totcarrello").text(totcarrello.toFixed(2) + ' €');
                                 },
                                 error: function (xhr, status, error) {
                                     console.error("Errore nell'aggiornamento della quantità");
@@ -538,13 +516,11 @@
                             success: function (response) {
                                 console.log("Quantità aggiornata con successo");
 
-                                // Calcola il nuovo prezzo totale per questo prodotto
                                 let nuovoPrezzoTotale = pu * nuovoValore;
-                                $("#prezzotot" + i).text(nuovoPrezzoTotale.toFixed(2) + ' €'); // Aggiorna il prezzo totale dell'elemento
+                                $("#prezzotot" + i).text(nuovoPrezzoTotale.toFixed(2) + ' €');
 
-                                // Aggiorna il totale del carrello
-                                totcarrello += differenzaQuantita * pu; // Aggiorna il totale del carrello
-                                $("#totcarrello").text(totcarrello.toFixed(2) + ' €'); // Visualizza il nuovo totale del carrello
+                                totcarrello += differenzaQuantita * pu;
+                                $("#totcarrello").text(totcarrello.toFixed(2) + ' €');
                             },
                             error: function (xhr, status, error) {
                                 console.error("Errore nell'aggiornamento della quantità");
@@ -554,29 +530,29 @@
 
 
                 } else if (nuovoValore === 0) {
-                    // Se la quantità è 0, invia una richiesta per rimuovere il prodotto
+
                     $.ajax({
                         url: "Dispatcher",
                         type: "POST",
                         data: {
                             controllerAction: "UserManagement.aggiungicarrello",
                             idprod: $("#idprod" + i).val(),
-                            quantita: "0" // Rimuovi completamente il prodotto
+                            quantita: "0"
                         },
                         success: function (response) {
                             console.log("Prodotto rimosso con successo");
                             k--;
-                            // Rimuovi l'elemento dal DOM
+
                             elemento.remove();
                             console.log(k);
                             if(k === 0){
-                                // Ricarica la pagina corrente
+
                                 location.reload();
 
                             }
-                            // Aggiorna il totale del carrello
-                            totcarrello -= prezzotot; // Sottrai il prezzo totale del prodotto rimosso
-                            $("#totcarrello").text(totcarrello.toFixed(2) + ' €'); // Aggiorna il totale
+
+                            totcarrello -= prezzotot;
+                            $("#totcarrello").text(totcarrello.toFixed(2) + ' €');
                         },
                         error: function (xhr, status, error) {
                             console.error("Errore nella rimozione del prodotto");
@@ -585,7 +561,6 @@
                 }
 
 
-                // Aggiorna il valore di quantità vecchia con il nuovo
                 $(this).data('quantita-vecchia', nuovoValore);
             });
 
@@ -597,17 +572,16 @@
         const quantityInput = document.getElementById("qta" + index);
         let currentValue = parseInt(quantityInput.value);
         quantityInput.value = currentValue + 1;
-        quantityInput.dispatchEvent(new Event('input')); // Trigger l'evento input per gestire l'aggiornamento
+        quantityInput.dispatchEvent(new Event('input'));
     }
 
     function decrementQuantity(index) {
         const quantityInput = document.getElementById("qta" + index);
         let currentValue = parseInt(quantityInput.value);
 
-        // Assicurati che non scenda sotto 1
         if (currentValue > 1) {
             quantityInput.value = currentValue - 1;
-            quantityInput.dispatchEvent(new Event('input')); // Trigger l'evento input per gestire l'aggiornamento
+            quantityInput.dispatchEvent(new Event('input'));
         }
     }
 

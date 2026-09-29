@@ -9,7 +9,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.glamourglow.glamourglow.model.mo.Coupon" %>
 <%
-    // Simulazione dei dati dei coupon passati come attributo
+
     List<Coupon> couponList = (List<Coupon>) request.getAttribute("coupon");
     String messaggio = (String) request.getAttribute("applicationMessage");
 %>
@@ -129,8 +129,8 @@
             font-size: 24px;
             color: #333;
             width: 100%;
-            text-align: right;  /* Allineato a destra */
-            margin-right: 50px; /* Distanza dal bordo destro */
+            text-align: right;
+            margin-right: 50px;
         }
 
         .add-coupon button {
@@ -273,8 +273,8 @@
         }
 
         .logo-container:hover .cont-admin {
-            display: block;  /* Mostra la tendina */
-            opacity: 1;      /* Imposta l'opacità a 1 per farla apparire */
+            display: block;
+            opacity: 1;
         }
 
 
@@ -282,7 +282,7 @@
 </head>
 <body>
 
-<!-- Header con logo e icona Home -->
+
 <div class="header">
     <div class="logo-container">
         <img src="<%= request.getContextPath() %>/images/logo.png" alt="Logo">

@@ -255,11 +255,10 @@
         </div>
 
 
-        <!-- Selezione della quantità -->
+
         <form action="Dispatcher" method="post" style="display: flex; align-items: center; gap: 20px;">
             <input type="hidden" name="controllerAction" value="UserManagement.aggiungicarrello"/>
 
-            <!-- Pulsante Aggiungi al Carrello -->
             <% if(loggedOn) { %>
             <button type="submit" class="add-to-cart-button">
                 Aggiungi al carrello
@@ -273,13 +272,11 @@
 
 
 
-            <!-- Selezione quantità e disponibilità in colonna -->
 
             <div style="display: flex; flex-direction: row; align-items: center;">
                 <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 5px;">
                     <label for="quantita" style="margin-bottom: -17%; margin-left: 10px">Quantità:</label>
 
-                    <!-- Select con altezza fissa e scroll interno -->
                     <select name="quantita" id="quantita" class="quantity-select" style="height: auto; max-height: 100px; overflow-y: auto;">
                         <% for (int i = 1; i <= prodotto.getQuantitaDispo(); i++) { %>
                         <option value="<%= i %>"><%= i %></option>

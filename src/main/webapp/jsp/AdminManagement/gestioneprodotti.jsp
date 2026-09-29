@@ -12,7 +12,7 @@
 <%@ page import="com.glamourglow.glamourglow.model.mo.Marchio" %>
 <%@ page import="com.glamourglow.glamourglow.model.mo.Categoria" %>
 <%
-    // Simulazione dei dati dei prodotti passati come attributo
+
     List<Prodotto> prodottiList = (List<Prodotto>) request.getAttribute("prodotti");
     List<Marchio> marchioList = (List<Marchio>) request.getAttribute("marchi");
     List<Categoria> categoriaList = (List<Categoria>) request.getAttribute("categorie");
@@ -223,7 +223,7 @@
         }
 
         .add-product button:hover {
-            background-color: #4b0082; /* Cambia il colore al passaggio del mouse */
+            background-color: #4b0082;
         }
 
 
@@ -257,9 +257,9 @@
         }
 
         select:focus {
-            outline: none;  /* Rimuove il bordo di default */
-            border-color: #4b0082;  /* Colore più scuro per il focus */
-            background-color: #f0f8ff;  /* Leggero cambiamento dello sfondo al focus */
+            outline: none;
+            border-color: #4b0082;
+            background-color: #f0f8ff;
         }
 
         option {
@@ -268,9 +268,9 @@
             color: #333;
         }
 
-        /* Colore della tendina */
+
         select:hover {
-            border-color: #4b0082;  /* Colore scuro al passaggio del mouse */
+            border-color: #4b0082;
         }
 
         input[type="text"] {
@@ -284,26 +284,25 @@
 
 
 
-
         .field-container input[type="checkbox"]:checked {
-            background-color: #6A5ACD;  /* Colore di sfondo per il checkbox selezionato */
+            background-color: #6A5ACD;
             border-color: #4b0082;
         }
 
         .field-container input[type="checkbox"]:focus {
             outline: none;
-            border-color: #4b0082;  /* Colore più scuro quando il checkbox è in focus */
+            border-color: #4b0082;
         }
 
         .field-container input[type="checkbox"]:hover {
-            background-color: #eee; /* Cambia il colore di sfondo quando si passa sopra il checkbox */
+            background-color: #eee;
         }
 
         input[type="checkbox"] {
             width: 20px;
             height: 20px;
-            margin-right: 10px;  /* Distanza tra la casella e il testo */
-            cursor: pointer; /* Cambia il cursore per il checkbox */
+            margin-right: 10px;
+            cursor: pointer;
         }
         .product-icon {
             width: 40px;
@@ -368,19 +367,19 @@
         }
 
         .logo-container:hover .cont-admin {
-            display: block;  /* Mostra la tendina */
-            opacity: 1;      /* Imposta l'opacità a 1 per farla apparire */
+            display: block;
+            opacity: 1;
         }
 
 
         .field-containe {
             display: flex;
-            align-items: center; /* Allinea il checkbox verticalmente al centro */
+            align-items: center;
             margin-bottom: 15px;
         }
 
         .field-containe label {
-            margin-left: 10px; /* Distanza tra checkbox e testo */
+            margin-left: 10px;
         }
 
         .field-containe input[type="checkbox"] {
@@ -388,7 +387,7 @@
             height: 20px;
             margin-right: -6px;
             cursor: pointer;
-            position: relative; /* Impostazione di default */
+            position: relative;
         }
 
 
@@ -415,7 +414,7 @@
     </div>
 </div>
 
-<!-- Contenitore principale -->
+
 <div class="product-container">
     <h2 class="product-header">
         Gestione Prodotti
@@ -428,7 +427,6 @@
 
         <% for(int i = 0; i < prodottiList.size(); i++) {
 
-           // System.out.println("prezzo:"+prodottiList.get(i).getPrezzo());
 
         %>
         <div class="product-management-item">
@@ -513,37 +511,37 @@
 
 <form method="post" action="Dispatcher" class="add-product">
     <h3>Aggiungi nuovo prodotto</h3>
-    <!-- Nome Prodotto -->
+
     <div class="field-containe">
         <label for="nomeprodotto">Nome Prodotto:</label>
         <input type="text" name="nomeprodotto" id="nomeprodotto" placeholder="Nome del prodotto" required />
     </div>
 
-    <!-- Descrizione Prodotto -->
+
     <div class="field-containe">
         <label for="descrizione">Descrizione Prodotto:</label>
         <textarea name="descrizione" id="descrizione" placeholder="Descrizione del prodotto" required></textarea>
     </div>
 
-    <!-- Prezzo -->
+
     <div class="field-containe">
         <label for="prezzo">Prezzo (€):</label>
         <input type="number" name="prezzo" id="prezzo" step="0.01" placeholder="Prezzo del prodotto" required />
     </div>
 
-    <!-- Quantità -->
+
     <div class="field-containe">
         <label for="quantita">Quantità Disponibile:</label>
         <input type="number" name="quantita" id="quantita" placeholder="Quantità disponibile" required />
     </div>
 
-    <!-- Immagine -->
+
     <div class="field-containe">
         <label for="immagine">Immagine Prodotto:</label>
         <input type="text" name="immagine" id="immagine" placeholder="Immagine" required  />
     </div>
 
-    <!-- Categoria -->
+
     <div class="field-containe">
         <label for="categoria">Categoria:</label>
         <select name="categoria" id="categoria" required>
@@ -553,7 +551,7 @@
         </select>
     </div>
 
-    <!-- In Promozione -->
+
     <div class="field-containe">
 
         <label for="promozione">In Promozione:</label>
@@ -561,13 +559,13 @@
 
     </div>
 
-    <!-- Prezzo Scontato -->
+
     <div class="field-containe">
         <label for="prezzo_scontato">Prezzo Scontato (€):</label>
         <input type="number" value="0.00" name="prezzo_scontato" id="prezzo_scontato" step="0.01" placeholder="Prezzo scontato" />
     </div>
 
-    <!-- Stato del Prodotto -->
+
     <div class="field-containe">
         <label for="stato">Stato del Prodotto:</label>
         <select name="stato" id="stato" required>
@@ -587,7 +585,7 @@
 
     </div>
 
-    <!-- Bottone di Submit -->
+
     <div class="field-containe">
         <input type="hidden" name="controllerAction" value="AdminManagement.aggiungiprodotti" />
         <button type="submit">Aggiungi Prodotto</button>

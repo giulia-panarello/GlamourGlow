@@ -128,7 +128,7 @@
 </head>
 <body>
 
-<!-- Header con logo e icona Home -->
+
 <div class="header">
     <div class="logo-container">
         <img src="<%= request.getContextPath() %>/images/logo.png" alt="Logo">

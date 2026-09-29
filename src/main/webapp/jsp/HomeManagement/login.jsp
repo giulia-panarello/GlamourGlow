@@ -116,7 +116,7 @@
 </head>
 <body>
 
-<!-- Header con logo e icona Home -->
+
 <div class="header">
     <div class="logo-container">
         <img src="<%= request.getContextPath() %>/images/logo.png" alt="Logo">
@@ -129,7 +129,7 @@
     </div>
 </div>
 
-<!-- Contenuto del login -->
+
 <div class="login-container">
     <h2>
         <img src="<%= request.getContextPath() %>/images/download.png" alt="Icona Login" style="width: 40px; height: 40px; vertical-align: middle; border-radius: 50%;"> Login

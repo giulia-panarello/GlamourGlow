@@ -70,8 +70,8 @@
             padding: 0;
             font-family: Arial, sans-serif;
             background-color: pink;
-            overflow: hidden; /* Impedisci lo scroll sull'intero body */
-            height: 100vh; /* Imposta l'altezza totale della pagina */
+            overflow: hidden;
+            height: 100vh;
             display: flex;
             flex-direction: column;
         }
@@ -90,34 +90,34 @@
 
         .utente-form {
             display: flex;
-            flex-direction: column; /* Dispone gli elementi in colonna */
-            margin-bottom: 15px; /* Spaziatura tra le righe */
+            flex-direction: column;
+            margin-bottom: 15px;
         }
 
         .field-container {
-            display: flex; /* Dispone etichetta e valore in una riga */
-            justify-content: flex-start; /* Allinea gli elementi all'inizio */
-            align-items: center; /* Allinea verticalmente */
-            margin-bottom: 10px; /* Spazio tra le righe */
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-bottom: 10px;
         }
 
         .field-container label {
-            margin-right: 10px; /* Spazio tra l'etichetta e il valore */
-            font-weight: bold; /* Rende l'etichetta in grassetto */
+            margin-right: 10px;
+            font-weight: bold;
         }
 
 
 
 
         .utente-form select {
-            width: 38%; /* Larghezza coerente con gli input */
-            padding: 10px; /* Padding per un aspetto più gradevole */
-            margin-top: 5px; /* Margine per separare dagli altri elementi */
+            width: 38%;
+            padding: 10px;
+            margin-top: 5px;
             border: 1px solid #6A5ACD;
-            border-radius: 5px; /* Angoli arrotondati */
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Ombra interna per profondità */
-            background-color: #f9f9f9; /* Colore di sfondo chiaro */
-            appearance: none; /* Rimuove lo stile predefinito del browser */
+            border-radius: 5px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+            appearance: none;
         }
 
 
@@ -163,11 +163,11 @@
 
         .user-management-item {
             padding: 15px;
-            border: 1px solid #eaeaea; /* Bordo per separare gli elementi */
-            border-radius: 5px; /* Angoli arrotondati */
+            border: 1px solid #eaeaea;
+            border-radius: 5px;
             display: flex;
-            flex-direction: column; /* Disporre in colonna */
-            justify-content: space-between; /* Spazio tra gli elementi */
+            flex-direction: column;
+            justify-content: space-between;
             position: relative;
             background-color: #E6E6FA;
             margin-bottom: 5%;
@@ -177,7 +177,7 @@
         .utente-form input[type="text"],
         .utente-form input[type="hidden"],
         .utente-form select {
-            width: 50%; /* Occupa tutta la larghezza */
+            width: 50%;
             padding: 10px;
             margin-top: 5px;
             border: 1px solid #6A5ACD;
@@ -186,7 +186,7 @@
         }
 
         .utente-form button {
-            width: 100%; /* Imposta la larghezza al 100% */
+            width: 100%;
             background-color: #6A5ACD;
             color: white;
             border: none;
@@ -194,8 +194,8 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
-            margin-top: 15px; /* Spazio sopra il pulsante */
-            text-align: center; /* Allinea al centro il testo */
+            margin-top: 15px;
+            text-align: center;
         }
 
 
@@ -204,10 +204,10 @@
         }
 
         .user-icon {
-            width: 40px; /* Imposta la larghezza dell'icona */
-            height: 40px; /* Imposta l'altezza dell'icona */
-            margin-right: 10px; /* Spazio tra l'icona e il titolo */
-            vertical-align: middle; /* Allinea verticalmente con il testo */
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            vertical-align: middle;
         }
 
         .cont-admin a {
@@ -235,17 +235,17 @@
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-        /* Mostra la tendina quando il logo è hoverato */
+
         .logo-container:hover .cont-admin {
-            display: block;  /* Mostra la tendina */
-            opacity: 1;      /* Imposta l'opacità a 1 per farla apparire */
+            display: block;
+            opacity: 1;
         }
 
     </style>
 </head>
 <body>
 
-<!-- Header con logo e icona Home -->
+
 <div class="header">
     <div class="logo-container">
         <img src="<%= request.getContextPath() %>/images/logo.png" alt="Logo">

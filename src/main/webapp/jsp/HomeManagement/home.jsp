@@ -167,45 +167,6 @@
             color: darkred;
         }
 
-
-        /*
-               .products-scroller {
-                   display: flex;
-                   align-items: center;
-                   overflow: hidden;
-                   position: relative;
-                   padding: 10px;
-               }
-
-
-               .products-container {
-                   display: flex;
-                   transition: transform 0.3s ease;
-                   will-change: transform;
-                   overflow-x: auto;
-                   width: 100%;
-                   scrollbar-width: none;
-
-               }
-               .product {
-                   display: flex;
-                   align-items: center;
-                   margin-right: 10px;
-                   background-color: #E6E6FA;
-                   padding: 50px;
-                   height: 300px;
-                   border-radius: 10px;
-                   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-               }
-               .products-container img {
-                   width: 100%;
-                   height: 100%;
-                   object-fit: contain;
-                   margin-right: 10px;
-
-               }
-
-                */
         .products-container h3 {
             margin: 0; /
             font-size: 18px;
@@ -360,7 +321,7 @@
     </style>
 </head>
 <body>
-<!-- Barra di ricerca con logo e icone -->
+
 <div class="search-container">
     <div class="logo-container">
         <img src="<%= request.getContextPath() %>/images/logo.png" alt="Icona">
@@ -472,7 +433,7 @@
 
 </div>
 
-<!-- Barra delle categorie -->
+
 <div class="category-bar">
 
     <a href="Dispatcher?controllerAction=HomeManagement.cerca&Categoria=Cura del corpo">Cura del corpo
@@ -524,7 +485,7 @@
 <% } %>
 
 
-<!-- Lista prodotti in promozione -->
+
 <div class="promo-products-container">
     <% if(promo != null && promo){
     %><h2>Prodotti in Promozione</h2> <%
@@ -554,12 +515,11 @@
             <% if (prodotti != null && !prodotti.isEmpty()) {
                 for (Prodotto prodotto : prodotti) {%>
             <div class="product" style="display: flex; flex-direction: column; align-items: center;">
-                <!-- Ingrandisci l'immagine senza deformarla -->
                 <div style="width:96%; height: 78%;"> <img src="images/prodotti/<%= prodotto.getImmagine() %>" alt="<%= prodotto.getNomeProdotto() %>"
                             style="width: 250px; height: 250px; object-fit: contain; margin-top: -7%;">
                 </div>
 
-                <!-- Nome del prodotto sotto l'immagine -->
+
                 <h3 style="text-align: center; margin-top: 10px; font-size: 15px;">
                     <a href="Dispatcher?controllerAction=ProductManagement.viewprodotto&id=<%= prodotto.getIdProdotto() %>">
                         <%= prodotto.getNomeProdotto() %>
@@ -572,11 +532,11 @@
 
 
                     %>
-                <!-- Prezzo originale tagliato -->
+
                 <div style="display:flex; align-items:center; margin-top: 8%; width: 69%; ">
                 <div class="original-price" style="text-decoration: line-through; text-align: center; font-size: 20px; margin-right: 15px; white-space: nowrap;"><%= String.format("%.2f", prodotto.getPrezzo()) %> € </div>
 
-                <!-- Prezzo scontato -->
+
 
                 <div style="color: #6A5ACD; font-weight: bold; font-size: 30px"><%= String.format("%.2f", prodotto.getPrezzoSconto()) %>€</div>
                 </div>

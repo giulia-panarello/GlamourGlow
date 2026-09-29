@@ -101,7 +101,7 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 2000);
             padding: 20px;
             width: 543px;
-            position: relative; /* Imposta la posizione relativa per il contenitore */
+            position: relative;
             text-align: center;
             margin-top: 3.5%;
             height: 442px;
@@ -134,7 +134,7 @@
             padding-right: 10px;
             margin-top: 10px;
             height: 100%;
-            padding-bottom: 60px; /* Margine inferiore per evitare sovrapposizioni */
+            padding-bottom: 60px;
         }
 
 
@@ -156,11 +156,11 @@
         }
         .product-name {
             margin-right: 10px;
-            white-space: normal; /* Consente al testo di andare a capo */
-            overflow-wrap: break-word; /* Permette il wrapping del testo */
-            word-break: break-word; /* Alternativa per spezzare le parole lunghe */
-            max-width: 150px; /* Puoi modificare questo valore a seconda delle tue necessità */
-            text-align: left; /* Allinea il testo a sinistra */
+            white-space: normal;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            max-width: 150px;
+            text-align: left;
             font-size: 13px;
         }
 
@@ -393,7 +393,6 @@
                         double prezzoTotale = prezzoProdotto * quantita;
                         double scontoApplicato = 0;
 
-                        // Calcolo dello sconto se presente
                         if (coupon != null && coupon[i] != null && sconto[i] != null) {
                             scontoApplicato = prezzoTotale * (Float.parseFloat(sconto[i]) / 100);
                             prezzoTotale -= scontoApplicato;
@@ -401,13 +400,11 @@
 
                         prezzoTotaleFinale += prezzoTotale;
 
-                        // Visualizzazione della percentuale di sconto
                         if (scontoApplicato > 0) {
 
                             out.print("<span style='color: green; position: absolute; left: -84%; bottom:-3%; '>-" + String.format("%.0f", Float.parseFloat(sconto[i])) + "% </span>");
                         }
 
-                        // Visualizzazione del prezzo finale
                         out.print( String.format("%.2f", prezzoTotale) + " &euro; ");
                     %>
                 </span>

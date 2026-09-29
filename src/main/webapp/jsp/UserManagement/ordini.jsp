@@ -66,8 +66,8 @@
             padding: 0;
             font-family: Arial, sans-serif;
             background-color: pink;
-            overflow: hidden; /* Impedisci lo scroll sull'intero body */
-            height: 100vh; /* Imposta l'altezza totale della pagina */
+            overflow: hidden;
+            height: 100vh;
             display: flex;
             flex-direction: column;
         }
@@ -110,7 +110,7 @@
             padding: 20px;
             display: flex;
             flex-direction: column;
-            height: 70vh; /* Altezza massima del contenitore principale */
+            height: 70vh;
         }
 
         .order-header {
@@ -128,8 +128,8 @@
         }
 
         .order-items {
-            flex: 1; /* Occupare lo spazio rimanente del contenitore principale */
-            overflow-y: auto; /* Abilitare lo scroll solo per gli ordini */
+            flex: 1;
+            overflow-y: auto;
         }
 
         .order-management-item {
