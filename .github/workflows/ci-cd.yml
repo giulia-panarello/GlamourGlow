@@ -1,0 +1,66 @@
+name: GlamourGlow CI/CD Pipeline
+
+# Events: Attivazione ad ogni push o pull request sul branch main o su tag di versione SemVer
+on:
+  push:
+    branches: [ "main" ]
+    tags: [ 'v*.*.*' ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  # JOB 1: Continuous Integration (CI) - Build & Test
+  build-and-test:
+    name: 1. CI - Build & Test Exec
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build e test con Maven
+        run: mvn -B clean verify
+
+      - name: Archiviazione Report dei Test Surefire/JaCoCo
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: target/surefire-reports/
+
+  # JOB 2: Continuous Delivery (CD) - Packaging dell'applicazione
+  package-and-deliver:
+    name: 2. CD - Generazione Artefatto WAR
+    needs: build-and-test
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Generazione pacchetto WAR
+        run: mvn -B package -DskipTests
+
+      - name: Caricamento dell'Artefatto .WAR pronto per il Deploy
+        uses: actions/upload-artifact@v4
+        with:
+          name: GlamourGlow-v1.0.0-war
+          path: target/*.war
