@@ -19,7 +19,7 @@ jobs:
       postgres:
         image: postgres:15
         env:
-          POSTGRES_DB: glamourglow
+          POSTGRES_DB: ecommerce
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgrespassword
         ports:
@@ -43,22 +43,13 @@ jobs:
 
       - name: Inizializzazione Schema PostgreSQL
         run: |
-          echo "=== Ricerca script SQL nel repository ==="
-          SQL_FILES=$(find . -type f -name "*.sql" ! -path "*/target/*")
-          
-          if [ -z "$SQL_FILES" ]; then
-            echo "ATTENZIONE: Nessun file .sql trovato!"
-          else
-            for sql_file in $SQL_FILES; do
-              echo "Esecuzione script: $sql_file"
-              PGPASSWORD=postgrespassword psql -h localhost -U postgres -d glamourglow -f "$sql_file"
-            done
-          fi
+          echo "Caricamento dello schema in corso..."
+          PGPASSWORD=postgrespassword psql -h localhost -U postgres -d ecommerce -f src/main/resources/schema.sql
 
       - name: Build e test con Maven
         run: mvn -B clean verify
         env:
-          DB_URL: jdbc:postgresql://localhost:5432/glamourglow
+          DB_URL: jdbc:postgresql://localhost:5432/ecommerce
           DB_USER: postgres
           DB_PASSWORD: postgrespassword
 
