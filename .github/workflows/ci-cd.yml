@@ -1,9 +1,9 @@
 name: GlamourGlow CI/CD Pipeline
 
 on:
+  workflow_dispatch:
   push:
     branches: [ "main" ]
-    tags: [ 'v*.*.*' ]
   pull_request:
     branches: [ "main" ]
 
@@ -35,15 +35,15 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
 
-      - name: Inizializzazione Schema PostgreSQL
+      - name: Inizializzazione Schema e Dati PostgreSQL
         run: |
-          echo "Caricamento dello schema in corso..."
+          echo "Inizializzazione database ecommerce..."
           PGPASSWORD=postgrespassword psql -h localhost -U postgres -d ecommerce -f src/main/resources/schema.sql
 
       - name: Build e test con Maven
@@ -53,7 +53,20 @@ jobs:
           DB_USER: postgres
           DB_PASSWORD: postgrespassword
 
-      - name: Archiviazione Report dei Test Surefire
+      - name: Stampa Dettagli Errore Test (se fallisce)
+        if: failure()
+        run: |
+          echo "=== REPORT DETTAGLIATO TEST FALLITI ==="
+          for file in target/surefire-reports/*.txt; do
+            if grep -q "FAILURE" "$file" || grep -q "ERROR" "$file"; then
+              echo "--------------------------------------------------"
+              echo "FILE: $file"
+              echo "--------------------------------------------------"
+              cat "$file"
+            fi
+          done
+
+      - name: Archiviazione Report dei Test
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -71,7 +84,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: '17'
           distribution: 'temurin'
