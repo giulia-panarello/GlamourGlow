@@ -15,7 +15,6 @@ jobs:
     name: 1. CI - Build & Test Exec
     runs-on: ubuntu-latest
 
-    # Avvio del container PostgreSQL per l'ambiente di test CI
     services:
       postgres:
         image: postgres:15
@@ -41,6 +40,16 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
+
+      - name: Inizializzazione Schema PostgreSQL
+        run: |
+          SQL_FILE=$(find . -maxdepth 3 -name "*.sql" | head -n 1)
+          if [ -n "$SQL_FILE" ]; then
+            echo "Esecuzione dello script SQL: $SQL_FILE"
+            PGPASSWORD=postgrespassword psql -h localhost -U postgres -d glamourglow -f "$SQL_FILE"
+          else
+            echo "Nessun file .sql trovato per l'inizializzazione"
+          fi
 
       - name: Build e test con Maven
         run: mvn -B clean verify
