@@ -43,12 +43,16 @@ jobs:
 
       - name: Inizializzazione Schema PostgreSQL
         run: |
-          SQL_FILE=$(find . -maxdepth 3 -name "*.sql" | head -n 1)
-          if [ -n "$SQL_FILE" ]; then
-            echo "Esecuzione dello script SQL: $SQL_FILE"
-            PGPASSWORD=postgrespassword psql -h localhost -U postgres -d glamourglow -f "$SQL_FILE"
+          echo "=== Ricerca script SQL nel repository ==="
+          SQL_FILES=$(find . -type f -name "*.sql" ! -path "*/target/*")
+          
+          if [ -z "$SQL_FILES" ]; then
+            echo "ATTENZIONE: Nessun file .sql trovato!"
           else
-            echo "Nessun file .sql trovato per l'inizializzazione"
+            for sql_file in $SQL_FILES; do
+              echo "Esecuzione script: $sql_file"
+              PGPASSWORD=postgrespassword psql -h localhost -U postgres -d glamourglow -f "$sql_file"
+            done
           fi
 
       - name: Build e test con Maven
