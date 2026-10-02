@@ -10,7 +10,6 @@
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
-SET transaction_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
@@ -24,7 +23,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: categoria; Type: TABLE; Schema: public; Owner: giuliapanarello
+-- Name: categoria; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.categoria (
@@ -34,10 +33,10 @@ CREATE TABLE public.categoria (
 );
 
 
-ALTER TABLE public.categoria OWNER TO giuliapanarello;
+ALTER TABLE public.categoria OWNER TO postgres;
 
 --
--- Name: categoria_id_categoria_seq; Type: SEQUENCE; Schema: public; Owner: giuliapanarello
+-- Name: categoria_id_categoria_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.categoria_id_categoria_seq
@@ -49,17 +48,17 @@ CREATE SEQUENCE public.categoria_id_categoria_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.categoria_id_categoria_seq OWNER TO giuliapanarello;
+ALTER SEQUENCE public.categoria_id_categoria_seq OWNER TO postgres;
 
 --
--- Name: categoria_id_categoria_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: giuliapanarello
+-- Name: categoria_id_categoria_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.categoria_id_categoria_seq OWNED BY public.categoria.id_categoria;
 
 
 --
--- Name: coupon; Type: TABLE; Schema: public; Owner: giuliapanarello
+-- Name: coupon; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.coupon (
@@ -68,10 +67,10 @@ CREATE TABLE public.coupon (
 );
 
 
-ALTER TABLE public.coupon OWNER TO giuliapanarello;
+ALTER TABLE public.coupon OWNER TO postgres;
 
 --
--- Name: dettagli_ordine; Type: TABLE; Schema: public; Owner: giuliapanarello
+-- Name: dettagli_ordine; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.dettagli_ordine (
@@ -84,10 +83,10 @@ CREATE TABLE public.dettagli_ordine (
 );
 
 
-ALTER TABLE public.dettagli_ordine OWNER TO giuliapanarello;
+ALTER TABLE public.dettagli_ordine OWNER TO postgres;
 
 --
--- Name: dettagli_ordine_id_dettaglio_seq; Type: SEQUENCE; Schema: public; Owner: giuliapanarello
+-- Name: dettagli_ordine_id_dettaglio_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.dettagli_ordine_id_dettaglio_seq
@@ -99,17 +98,17 @@ CREATE SEQUENCE public.dettagli_ordine_id_dettaglio_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.dettagli_ordine_id_dettaglio_seq OWNER TO giuliapanarello;
+ALTER SEQUENCE public.dettagli_ordine_id_dettaglio_seq OWNER TO postgres;
 
 --
--- Name: dettagli_ordine_id_dettaglio_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: giuliapanarello
+-- Name: dettagli_ordine_id_dettaglio_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.dettagli_ordine_id_dettaglio_seq OWNED BY public.dettagli_ordine.id_dettaglio;
 
 
 --
--- Name: marchio; Type: TABLE; Schema: public; Owner: giuliapanarello
+-- Name: marchio; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.marchio (
@@ -118,10 +117,10 @@ CREATE TABLE public.marchio (
 );
 
 
-ALTER TABLE public.marchio OWNER TO giuliapanarello;
+ALTER TABLE public.marchio OWNER TO postgres;
 
 --
--- Name: marchio_id_marchio_seq; Type: SEQUENCE; Schema: public; Owner: giuliapanarello
+-- Name: marchio_id_marchio_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.marchio_id_marchio_seq
@@ -133,17 +132,17 @@ CREATE SEQUENCE public.marchio_id_marchio_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.marchio_id_marchio_seq OWNER TO giuliapanarello;
+ALTER SEQUENCE public.marchio_id_marchio_seq OWNER TO postgres;
 
 --
--- Name: marchio_id_marchio_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: giuliapanarello
+-- Name: marchio_id_marchio_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.marchio_id_marchio_seq OWNED BY public.marchio.id_marchio;
 
 
 --
--- Name: ordine; Type: TABLE; Schema: public; Owner: giuliapanarello
+-- Name: ordine; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.ordine (
@@ -158,10 +157,10 @@ CREATE TABLE public.ordine (
 );
 
 
-ALTER TABLE public.ordine OWNER TO giuliapanarello;
+ALTER TABLE public.ordine OWNER TO postgres;
 
 --
--- Name: ordine_id_ordine_seq; Type: SEQUENCE; Schema: public; Owner: giuliapanarello
+-- Name: ordine_id_ordine_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.ordine_id_ordine_seq
@@ -173,17 +172,17 @@ CREATE SEQUENCE public.ordine_id_ordine_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.ordine_id_ordine_seq OWNER TO giuliapanarello;
+ALTER SEQUENCE public.ordine_id_ordine_seq OWNER TO postgres;
 
 --
--- Name: ordine_id_ordine_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: giuliapanarello
+-- Name: ordine_id_ordine_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.ordine_id_ordine_seq OWNED BY public.ordine.id_ordine;
 
 
 --
--- Name: prodotto; Type: TABLE; Schema: public; Owner: giuliapanarello
+-- Name: prodotto; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.prodotto (
@@ -201,10 +200,10 @@ CREATE TABLE public.prodotto (
 );
 
 
-ALTER TABLE public.prodotto OWNER TO giuliapanarello;
+ALTER TABLE public.prodotto OWNER TO postgres;
 
 --
--- Name: prodotto_id_prodotto_seq; Type: SEQUENCE; Schema: public; Owner: giuliapanarello
+-- Name: prodotto_id_prodotto_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.prodotto_id_prodotto_seq
@@ -216,17 +215,17 @@ CREATE SEQUENCE public.prodotto_id_prodotto_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.prodotto_id_prodotto_seq OWNER TO giuliapanarello;
+ALTER SEQUENCE public.prodotto_id_prodotto_seq OWNER TO postgres;
 
 --
--- Name: prodotto_id_prodotto_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: giuliapanarello
+-- Name: prodotto_id_prodotto_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.prodotto_id_prodotto_seq OWNED BY public.prodotto.id_prodotto;
 
 
 --
--- Name: utente; Type: TABLE; Schema: public; Owner: giuliapanarello
+-- Name: utente; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.utente (
@@ -242,10 +241,10 @@ CREATE TABLE public.utente (
 );
 
 
-ALTER TABLE public.utente OWNER TO giuliapanarello;
+ALTER TABLE public.utente OWNER TO postgres;
 
 --
--- Name: utente_id_nome_seq; Type: SEQUENCE; Schema: public; Owner: giuliapanarello
+-- Name: utente_id_nome_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.utente_id_nome_seq
@@ -257,59 +256,59 @@ CREATE SEQUENCE public.utente_id_nome_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.utente_id_nome_seq OWNER TO giuliapanarello;
+ALTER SEQUENCE public.utente_id_nome_seq OWNER TO postgres;
 
 --
--- Name: utente_id_nome_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: giuliapanarello
+-- Name: utente_id_nome_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.utente_id_nome_seq OWNED BY public.utente.id_nome;
 
 
 --
--- Name: categoria id_categoria; Type: DEFAULT; Schema: public; Owner: giuliapanarello
+-- Name: categoria id_categoria; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.categoria ALTER COLUMN id_categoria SET DEFAULT nextval('public.categoria_id_categoria_seq'::regclass);
 
 
 --
--- Name: dettagli_ordine id_dettaglio; Type: DEFAULT; Schema: public; Owner: giuliapanarello
+-- Name: dettagli_ordine id_dettaglio; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.dettagli_ordine ALTER COLUMN id_dettaglio SET DEFAULT nextval('public.dettagli_ordine_id_dettaglio_seq'::regclass);
 
 
 --
--- Name: marchio id_marchio; Type: DEFAULT; Schema: public; Owner: giuliapanarello
+-- Name: marchio id_marchio; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.marchio ALTER COLUMN id_marchio SET DEFAULT nextval('public.marchio_id_marchio_seq'::regclass);
 
 
 --
--- Name: ordine id_ordine; Type: DEFAULT; Schema: public; Owner: giuliapanarello
+-- Name: ordine id_ordine; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.ordine ALTER COLUMN id_ordine SET DEFAULT nextval('public.ordine_id_ordine_seq'::regclass);
 
 
 --
--- Name: prodotto id_prodotto; Type: DEFAULT; Schema: public; Owner: giuliapanarello
+-- Name: prodotto id_prodotto; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.prodotto ALTER COLUMN id_prodotto SET DEFAULT nextval('public.prodotto_id_prodotto_seq'::regclass);
 
 
 --
--- Name: utente id_nome; Type: DEFAULT; Schema: public; Owner: giuliapanarello
+-- Name: utente id_nome; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.utente ALTER COLUMN id_nome SET DEFAULT nextval('public.utente_id_nome_seq'::regclass);
 
 
 --
--- Data for Name: categoria; Type: TABLE DATA; Schema: public; Owner: giuliapanarello
+-- Data for Name: categoria; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.categoria (id_categoria, nome_categoria, descrizione) FROM stdin;
@@ -323,7 +322,7 @@ COPY public.categoria (id_categoria, nome_categoria, descrizione) FROM stdin;
 
 
 --
--- Data for Name: coupon; Type: TABLE DATA; Schema: public; Owner: giuliapanarello
+-- Data for Name: coupon; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.coupon (codice, sconto) FROM stdin;
@@ -364,7 +363,7 @@ ITCOUPON01	10
 
 
 --
--- Data for Name: dettagli_ordine; Type: TABLE DATA; Schema: public; Owner: giuliapanarello
+-- Data for Name: dettagli_ordine; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.dettagli_ordine (id_dettaglio, id_ordine, id_prodotto, quantita, prezzo_unitario, coupon) FROM stdin;
@@ -404,7 +403,7 @@ COPY public.dettagli_ordine (id_dettaglio, id_ordine, id_prodotto, quantita, pre
 
 
 --
--- Data for Name: marchio; Type: TABLE DATA; Schema: public; Owner: giuliapanarello
+-- Data for Name: marchio; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.marchio (id_marchio, nome_marchio) FROM stdin;
@@ -432,7 +431,7 @@ COPY public.marchio (id_marchio, nome_marchio) FROM stdin;
 
 
 --
--- Data for Name: ordine; Type: TABLE DATA; Schema: public; Owner: giuliapanarello
+-- Data for Name: ordine; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.ordine (id_ordine, id_utente, data_ordine, stato_ordine, totale_ordine, indirizzo_consegna, citta, stato) FROM stdin;
@@ -470,7 +469,7 @@ COPY public.ordine (id_ordine, id_utente, data_ordine, stato_ordine, totale_ordi
 
 
 --
--- Data for Name: prodotto; Type: TABLE DATA; Schema: public; Owner: giuliapanarello
+-- Data for Name: prodotto; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.prodotto (id_prodotto, nome_prodotto, descrizione, prezzo, quantita_disponibile, id_categoria, id_marchio, in_promozione, immagine, prezzo_scontato, stato_prodotto) FROM stdin;
@@ -602,7 +601,7 @@ COPY public.prodotto (id_prodotto, nome_prodotto, descrizione, prezzo, quantita_
 
 
 --
--- Data for Name: utente; Type: TABLE DATA; Schema: public; Owner: giuliapanarello
+-- Data for Name: utente; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.utente (id_nome, nome, cognome, email, password, ruolo, telefono, stato_account, wallet) FROM stdin;
@@ -652,49 +651,49 @@ COPY public.utente (id_nome, nome, cognome, email, password, ruolo, telefono, st
 
 
 --
--- Name: categoria_id_categoria_seq; Type: SEQUENCE SET; Schema: public; Owner: giuliapanarello
+-- Name: categoria_id_categoria_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.categoria_id_categoria_seq', 2021, true);
 
 
 --
--- Name: dettagli_ordine_id_dettaglio_seq; Type: SEQUENCE SET; Schema: public; Owner: giuliapanarello
+-- Name: dettagli_ordine_id_dettaglio_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.dettagli_ordine_id_dettaglio_seq', 442, true);
 
 
 --
--- Name: marchio_id_marchio_seq; Type: SEQUENCE SET; Schema: public; Owner: giuliapanarello
+-- Name: marchio_id_marchio_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.marchio_id_marchio_seq', 3029, true);
 
 
 --
--- Name: ordine_id_ordine_seq; Type: SEQUENCE SET; Schema: public; Owner: giuliapanarello
+-- Name: ordine_id_ordine_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.ordine_id_ordine_seq', 436, true);
 
 
 --
--- Name: prodotto_id_prodotto_seq; Type: SEQUENCE SET; Schema: public; Owner: giuliapanarello
+-- Name: prodotto_id_prodotto_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.prodotto_id_prodotto_seq', 4963, true);
 
 
 --
--- Name: utente_id_nome_seq; Type: SEQUENCE SET; Schema: public; Owner: giuliapanarello
+-- Name: utente_id_nome_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.utente_id_nome_seq', 1225, true);
 
 
 --
--- Name: categoria categoria_pkey; Type: CONSTRAINT; Schema: public; Owner: giuliapanarello
+-- Name: categoria categoria_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.categoria
@@ -702,7 +701,7 @@ ALTER TABLE ONLY public.categoria
 
 
 --
--- Name: coupon coupon_pkey; Type: CONSTRAINT; Schema: public; Owner: giuliapanarello
+-- Name: coupon coupon_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.coupon
@@ -710,7 +709,7 @@ ALTER TABLE ONLY public.coupon
 
 
 --
--- Name: dettagli_ordine dettagli_ordine_pkey; Type: CONSTRAINT; Schema: public; Owner: giuliapanarello
+-- Name: dettagli_ordine dettagli_ordine_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.dettagli_ordine
@@ -718,7 +717,7 @@ ALTER TABLE ONLY public.dettagli_ordine
 
 
 --
--- Name: marchio marchio_pkey; Type: CONSTRAINT; Schema: public; Owner: giuliapanarello
+-- Name: marchio marchio_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.marchio
@@ -726,7 +725,7 @@ ALTER TABLE ONLY public.marchio
 
 
 --
--- Name: ordine ordine_pkey; Type: CONSTRAINT; Schema: public; Owner: giuliapanarello
+-- Name: ordine ordine_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.ordine
@@ -734,7 +733,7 @@ ALTER TABLE ONLY public.ordine
 
 
 --
--- Name: prodotto prodotto_pkey; Type: CONSTRAINT; Schema: public; Owner: giuliapanarello
+-- Name: prodotto prodotto_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.prodotto
@@ -742,7 +741,7 @@ ALTER TABLE ONLY public.prodotto
 
 
 --
--- Name: utente utente_pkey; Type: CONSTRAINT; Schema: public; Owner: giuliapanarello
+-- Name: utente utente_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.utente
@@ -750,7 +749,7 @@ ALTER TABLE ONLY public.utente
 
 
 --
--- Name: dettagli_ordine dettagli_ordine_coupon_fkey; Type: FK CONSTRAINT; Schema: public; Owner: giuliapanarello
+-- Name: dettagli_ordine dettagli_ordine_coupon_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.dettagli_ordine
@@ -758,7 +757,7 @@ ALTER TABLE ONLY public.dettagli_ordine
 
 
 --
--- Name: dettagli_ordine dettagli_ordine_id_ordine_fkey; Type: FK CONSTRAINT; Schema: public; Owner: giuliapanarello
+-- Name: dettagli_ordine dettagli_ordine_id_ordine_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.dettagli_ordine
@@ -766,7 +765,7 @@ ALTER TABLE ONLY public.dettagli_ordine
 
 
 --
--- Name: dettagli_ordine dettagli_ordine_id_prodotto_fkey; Type: FK CONSTRAINT; Schema: public; Owner: giuliapanarello
+-- Name: dettagli_ordine dettagli_ordine_id_prodotto_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.dettagli_ordine
@@ -774,7 +773,7 @@ ALTER TABLE ONLY public.dettagli_ordine
 
 
 --
--- Name: ordine ordine_id_utente_fkey; Type: FK CONSTRAINT; Schema: public; Owner: giuliapanarello
+-- Name: ordine ordine_id_utente_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.ordine
@@ -782,7 +781,7 @@ ALTER TABLE ONLY public.ordine
 
 
 --
--- Name: prodotto prodotto_id_categoria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: giuliapanarello
+-- Name: prodotto prodotto_id_categoria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.prodotto
@@ -790,7 +789,7 @@ ALTER TABLE ONLY public.prodotto
 
 
 --
--- Name: prodotto prodotto_id_marchio_fkey; Type: FK CONSTRAINT; Schema: public; Owner: giuliapanarello
+-- Name: prodotto prodotto_id_marchio_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.prodotto
