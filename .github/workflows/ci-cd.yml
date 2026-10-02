@@ -18,7 +18,7 @@ jobs:
         env:
           POSTGRES_DB: ecommerce
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgrespassword
+          POSTGRES_PASSWORD: postgres
         ports:
           - 5432:5432
         options: >-
@@ -44,14 +44,17 @@ jobs:
       - name: Inizializzazione Schema e Dati PostgreSQL
         run: |
           echo "Inizializzazione database ecommerce..."
-          PGPASSWORD=postgrespassword psql -h localhost -U postgres -d ecommerce -f src/main/resources/schema.sql
+          PGPASSWORD=postgres psql -h localhost -U postgres -d ecommerce -f src/main/resources/schema.sql
+          if [ -f "src/main/resources/data.sql" ]; then
+            PGPASSWORD=postgres psql -h localhost -U postgres -d ecommerce -f src/main/resources/data.sql
+          fi
 
       - name: Build e test con Maven
-        run: mvn -B -q clean verify
+        run: mvn -B clean verify -e
         env:
           DB_URL: jdbc:postgresql://localhost:5432/ecommerce
           DB_USER: postgres
-          DB_PASSWORD: postgrespassword
+          DB_PASSWORD: postgres
           MAVEN_OPTS: "-XX:+EnableDynamicAgentLoading"
 
       - name: Salva Report dei Test se fallisce
