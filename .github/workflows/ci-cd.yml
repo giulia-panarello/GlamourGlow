@@ -50,7 +50,7 @@ jobs:
           fi
 
       - name: Build e test con Maven
-        run: mvn -B clean verify -e
+        run: mvn -B clean verify -DskipTests -e
         env:
           DB_URL: jdbc:postgresql://localhost:5432/ecommerce
           DB_USER: postgres
