@@ -19,6 +19,7 @@ jobs:
           POSTGRES_DB: ecommerce
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
+          POSTGRES_HOST_AUTH_METHOD: trust # <--- Questa riga risolve il problema SCRAM
         ports:
           - 5432:5432
         options: >-
@@ -50,19 +51,11 @@ jobs:
           fi
 
       - name: Build e test con Maven
-        run: >-
-          mvn -B clean verify -DskipITs -e
-          -Ddb.url=jdbc:postgresql://localhost:5432/ecommerce
-          -Ddb.user=postgres
-          -Ddb.password=postgres
-          -Dpostgres.password=postgres
+        run: mvn -B clean verify -DskipITs -e
         env:
           DB_URL: jdbc:postgresql://localhost:5432/ecommerce
           DB_USER: postgres
           DB_PASSWORD: postgres
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          PGPASSWORD: postgres
           MAVEN_OPTS: "-XX:+EnableDynamicAgentLoading"
 
       - name: Salva Report dei Test se fallisce
