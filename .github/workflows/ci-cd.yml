@@ -19,7 +19,7 @@ jobs:
           POSTGRES_DB: ecommerce
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          POSTGRES_HOST_AUTH_METHOD: trust # <--- Questa riga risolve il problema SCRAM
+          POSTGRES_HOST_AUTH_METHOD: trust
         ports:
           - 5432:5432
         options: >-
@@ -45,13 +45,21 @@ jobs:
       - name: Inizializzazione Schema e Dati PostgreSQL
         run: |
           echo "Inizializzazione database ecommerce..."
+          # Crea il ruolo 'runner' con permessi per gestire la connessione di default
+          PGPASSWORD=postgres psql -h localhost -U postgres -c "CREATE ROLE runner WITH LOGIN SUPERUSER;" || true
           PGPASSWORD=postgres psql -h localhost -U postgres -d ecommerce -f src/main/resources/schema.sql
           if [ -f "src/main/resources/data.sql" ]; then
             PGPASSWORD=postgres psql -h localhost -U postgres -d ecommerce -f src/main/resources/data.sql
           fi
 
       - name: Build e test con Maven
-        run: mvn -B clean verify -DskipITs -e
+        run: >-
+          mvn -B clean verify -DskipITs -e
+          -Ddb.user=postgres
+          -Ddb.password=postgres
+          -Ddb.url=jdbc:postgresql://localhost:5432/ecommerce
+          -Djdbc.username=postgres
+          -Djdbc.password=postgres
         env:
           DB_URL: jdbc:postgresql://localhost:5432/ecommerce
           DB_USER: postgres
