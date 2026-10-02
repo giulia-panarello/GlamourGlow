@@ -57,10 +57,8 @@ class ConfigurationTest {
                 Configuration.GLOBAL_LOGGER_NAME
         );
 
-        assertEquals(
-                "/Users/giuliapanarello/Desktop/ProgettoSistemiWeb/ecommerce_log.%g.%u.txt",
-                Configuration.GLOBAL_LOGGER_FILE
-        );
+
+        assertEquals("ecommerce_log.%g.%u.txt", Configuration.GLOBAL_LOGGER_FILE);
 
         assertEquals(
                 Level.ALL,

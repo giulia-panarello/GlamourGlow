@@ -12,6 +12,11 @@ public class LogService {
     private LogService() {
     }
 
+    // Metodo per azzerare lo stato statico durante i test
+    public static void resetLogger() {
+        applicationLogger = null;
+    }
+
     public static Logger getApplicationLogger() {
 
         SimpleFormatter formatterTxt;
@@ -33,7 +38,10 @@ public class LogService {
             }
 
         } catch (IOException e) {
-            applicationLogger.log(Level.SEVERE, "Error occured in Logger creation", e);
+            if (applicationLogger != null) {
+                applicationLogger.log(Level.SEVERE, "Error occured in Logger creation", e);
+            }
+            applicationLogger = null; // Ripristina a null se la creazione fallisce
             throw new RuntimeException(e);
         }
         return applicationLogger;

@@ -18,7 +18,8 @@ public class Configuration {
     public static final String COOKIE_IMPL=DAOFactory.COOKIEIMPL;
 
     public static final String GLOBAL_LOGGER_NAME="rubrica";
-    public static final String GLOBAL_LOGGER_FILE="/Users/giuliapanarello/Desktop/ProgettoSistemiWeb/ecommerce_log.%g.%u.txt";
+    public static final String GLOBAL_LOGGER_FILE = "ecommerce_log.%g.%u.txt";
+    // public static final String GLOBAL_LOGGER_FILE="/Users/giuliapanarello/Desktop/ProgettoSistemiWeb/ecommerce_log.%g.%u.txt";
     public static final Level GLOBAL_LOGGER_LEVEL=Level.ALL;
 
 }
