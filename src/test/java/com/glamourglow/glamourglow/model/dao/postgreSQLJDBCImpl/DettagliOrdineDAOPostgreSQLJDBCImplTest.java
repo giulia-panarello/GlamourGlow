@@ -146,7 +146,7 @@ public class DettagliOrdineDAOPostgreSQLJDBCImplTest {
         when(rs.getLong("id_dettaglio")).thenReturn(20L, 21L);
         when(rs.getInt("quantita")).thenReturn(2, 1);
         when(rs.getDouble("prezzo_unitario")).thenReturn(25.50, 15.00);
-        when(rs.getString("coupon")).thenReturn("SCONTO10", null);
+        when(rs.getString("coupon")).thenReturn("SCONTO10", (String) null);
         when(rs.getLong("id_ordine")).thenReturn(10L);
         when(rs.getLong("id_prodotto")).thenReturn(5L, 6L);
 
