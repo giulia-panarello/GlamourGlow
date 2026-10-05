@@ -284,37 +284,24 @@ public class PostgreSQLJDBCDAOFactoryTest {
 
     @Test
     void beginTransaction_disabilitaAutoCommit() throws Exception {
+        Connection connectionMock = mock(Connection.class);
 
-        java.sql.Driver driver = new org.postgresql.Driver();
-        java.sql.DriverManager.registerDriver(driver);
+        try (MockedStatic<DriverManager> driverManagerMock = mockStatic(DriverManager.class)) {
+            driverManagerMock
+                    .when(() -> DriverManager.getConnection(Configuration.DATABASE_URL))
+                    .thenReturn(connectionMock);
 
-        try {
             PostgreSQLJDBCDAOFactory factory =
                     new PostgreSQLJDBCDAOFactory(new HashMap<>());
 
             factory.beginTransaction();
 
-            Field field =
-                    PostgreSQLJDBCDAOFactory.class.getDeclaredField("connection");
-            field.setAccessible(true);
-
-            Connection connection =
-                    (Connection) field.get(factory);
-
-            assertFalse(connection.getAutoCommit());
-
-            factory.rollbackTransaction();
-            factory.closeTransaction();
-
-        } finally {
-            java.sql.DriverManager.deregisterDriver(driver);
+            verify(connectionMock).setAutoCommit(false);
         }
     }
 
-
     @Test
     void beginTransaction_erroreSQL_lanciaRuntimeException() {
-
         SQLException exceptionDaLanciare =
                 new SQLException("Errore di connessione");
 
@@ -325,8 +312,7 @@ public class PostgreSQLJDBCDAOFactoryTest {
                      mockStatic(DriverManager.class)) {
 
             driverManagerMock
-                    .when(() -> DriverManager.getConnection(
-                            Configuration.DATABASE_URL))
+                    .when(() -> DriverManager.getConnection(Configuration.DATABASE_URL))
                     .thenThrow(exceptionDaLanciare);
 
             RuntimeException exception = assertThrows(
@@ -341,12 +327,8 @@ public class PostgreSQLJDBCDAOFactoryTest {
         }
     }
 
-
-
-
     @Test
     void beginTransaction_driverNonTrovato_lanciaRuntimeException() {
-
         PostgreSQLJDBCDAOFactory factory =
                 new PostgreSQLJDBCDAOFactory(new HashMap<>()) {
 
@@ -370,7 +352,6 @@ public class PostgreSQLJDBCDAOFactoryTest {
                 exception.getCause()
         );
     }
-
 
 
 }

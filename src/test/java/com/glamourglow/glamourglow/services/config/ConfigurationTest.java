@@ -1,4 +1,5 @@
 package com.glamourglow.glamourglow.services.config;
+
 import com.glamourglow.glamourglow.model.dao.DAOFactory;
 import org.junit.jupiter.api.Test;
 
@@ -30,6 +31,22 @@ class ConfigurationTest {
     }
 
     @Test
+    void resolveDatabaseUrl_conEnvUrlValida() {
+        String customUrl = "jdbc:postgresql://customhost:5432/customdb";
+        assertEquals(customUrl, Configuration.resolveDatabaseUrl(customUrl));
+    }
+
+    @Test
+    void resolveDatabaseUrl_conNull_restituisceDefault() {
+        assertEquals("jdbc:postgresql://localhost:5432/ecommerce", Configuration.resolveDatabaseUrl(null));
+    }
+
+    @Test
+    void resolveDatabaseUrl_conStringaVuota_restituisceDefault() {
+        assertEquals("jdbc:postgresql://localhost:5432/ecommerce", Configuration.resolveDatabaseUrl("   "));
+    }
+
+    @Test
     void configurazioneSessione() {
 
         assertEquals(
@@ -56,7 +73,6 @@ class ConfigurationTest {
                 "rubrica",
                 Configuration.GLOBAL_LOGGER_NAME
         );
-
 
         assertEquals("ecommerce_log.%g.%u.txt", Configuration.GLOBAL_LOGGER_FILE);
 

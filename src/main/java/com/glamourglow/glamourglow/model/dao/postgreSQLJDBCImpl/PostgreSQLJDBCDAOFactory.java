@@ -23,24 +23,12 @@ public class PostgreSQLJDBCDAOFactory extends DAOFactory {
     protected void loadDriver() throws ClassNotFoundException {
         Class.forName(Configuration.DATABASE_DRIVER);
     }
+
     @Override
     public void beginTransaction() {
         try {
             loadDriver();
-
-            String dbUrl = System.getenv("DB_URL");
-            if (dbUrl != null && !dbUrl.isBlank()) {
-                String dbUser = System.getenv("DB_USER");
-                String dbPassword = System.getenv("DB_PASSWORD");
-                if (dbUser != null && !dbUser.isBlank() && dbPassword != null && !dbPassword.isBlank()) {
-                    this.connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
-                } else {
-                    this.connection = DriverManager.getConnection(dbUrl);
-                }
-            } else {
-                this.connection = DriverManager.getConnection(Configuration.DATABASE_URL);
-            }
-
+            this.connection = DriverManager.getConnection(Configuration.DATABASE_URL);
             this.connection.setAutoCommit(false);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Driver non trovato: " + e.getMessage(), e);

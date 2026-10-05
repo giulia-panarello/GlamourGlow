@@ -2,7 +2,6 @@ package com.glamourglow.glamourglow.services.logservice;
 
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,6 +11,17 @@ import java.util.logging.Logger;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LogServiceTest {
+
+    @Test
+    void testResetECoppiaChiamataLogger() {
+        LogService.resetLogger();
+
+        Logger logger1 = LogService.getApplicationLogger();
+        assertNotNull(logger1);
+
+        Logger logger2 = LogService.getApplicationLogger();
+        assertSame(logger1, logger2);
+    }
 
     @Test
     void getApplicationLogger_erroreCreazioneFile_generaRuntimeException()
@@ -24,11 +34,7 @@ class LogServiceTest {
             logger.removeHandler(handler);
         }
 
-        Field field = LogService.class.getDeclaredField("applicationLogger");
-        field.setAccessible(true);
-        field.set(null, null);
-
-        // Uso di percorsi relativi alla cartella di lavoro corrente
+        LogService.resetLogger();
         Path logPath = Paths.get("ecommerce_log.0.0.txt");
         Path backupPath = Paths.get("ecommerce_log.0.0.txt.test-backup");
 
@@ -40,7 +46,6 @@ class LogServiceTest {
                 Files.move(logPath, backupPath);
             }
 
-            // Crea una directory con lo stesso nome del file per simulare l'errore di I/O
             Files.createDirectory(logPath);
 
             RuntimeException exception = assertThrows(
@@ -68,7 +73,7 @@ class LogServiceTest {
                 logger.removeHandler(handler);
             }
 
-            field.set(null, null);
+            LogService.resetLogger();
         }
     }
 }
