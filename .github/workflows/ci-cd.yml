@@ -55,19 +55,12 @@ jobs:
             PGPASSWORD=postgres psql -h localhost -U postgres -d ecommerce -f src/main/resources/data.sql
           fi
 
+
       - name: Esecuzione Build e Test con Maven
-        run: >-
-          mvn -B clean verify -DskipITs -e
-          -Ddb.user=postgres
-          -Ddb.password=postgres
-          -Ddb.url=jdbc:postgresql://localhost:5432/ecommerce
-          -Djdbc.username=postgres
-          -Djdbc.password=postgres
+        run: mvn -B clean verify -DskipITs -e
         env:
-          DB_URL: jdbc:postgresql://localhost:5432/ecommerce
-          DB_USER: postgres
-          DB_PASSWORD: postgres
           MAVEN_OPTS: "-XX:+EnableDynamicAgentLoading"
+
 
       - name: Salvataggio pacchetto WAR per la fase di CD
         uses: actions/upload-artifact@v7

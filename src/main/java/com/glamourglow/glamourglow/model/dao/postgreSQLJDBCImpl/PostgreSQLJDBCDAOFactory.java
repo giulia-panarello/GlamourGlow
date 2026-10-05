@@ -25,7 +25,6 @@ public class PostgreSQLJDBCDAOFactory extends DAOFactory {
     }
     @Override
     public void beginTransaction() {
-
         try {
             loadDriver();
 
@@ -36,22 +35,22 @@ public class PostgreSQLJDBCDAOFactory extends DAOFactory {
             if (dbUrl == null || dbUrl.isBlank()) {
                 dbUrl = Configuration.DATABASE_URL;
             }
-
-            if (dbUser != null && !dbUser.isBlank() && dbPassword != null && !dbPassword.isBlank()) {
-                if (!dbUrl.contains("user=")) {
-                    String separator = dbUrl.contains("?") ? "&" : "?";
-                    dbUrl = dbUrl + separator + "user=" + dbUser + "&password=" + dbPassword;
-                }
+            if (dbUser == null || dbUser.isBlank()) {
+                dbUser = "postgres";
+            }
+            if (dbPassword == null || dbPassword.isBlank()) {
+                dbPassword = "postgres";
             }
 
-            this.connection = DriverManager.getConnection(dbUrl);
-            this.connection.setAutoCommit(false);
+            this.connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+            if (this.connection != null) {
+                this.connection.setAutoCommit(false);
+            }
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Driver non trovato: " + e.getMessage(), e);
         } catch (SQLException e) {
             throw new RuntimeException("Errore di connessione: " + e.getMessage(), e);
         }
-
     }
 
     @Override
