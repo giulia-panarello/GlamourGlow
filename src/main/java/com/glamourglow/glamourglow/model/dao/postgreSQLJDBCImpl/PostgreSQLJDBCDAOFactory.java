@@ -29,11 +29,9 @@ public class PostgreSQLJDBCDAOFactory extends DAOFactory {
         try {
             loadDriver();
 
-
             String dbUrl = System.getenv("DB_URL");
             String dbUser = System.getenv("DB_USER");
             String dbPassword = System.getenv("DB_PASSWORD");
-
 
             if (dbUrl == null || dbUrl.isBlank()) {
                 dbUrl = Configuration.DATABASE_URL;
@@ -43,6 +41,10 @@ public class PostgreSQLJDBCDAOFactory extends DAOFactory {
                 this.connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
             } else {
                 this.connection = DriverManager.getConnection(dbUrl);
+            }
+
+            if (this.connection == null) {
+                throw new SQLException("Errore di connessione");
             }
 
             this.connection.setAutoCommit(false);
