@@ -38,3 +38,4 @@ build/
 .DS_Store
 .jqwik-database
 ecommerce_log*
+.idea/
