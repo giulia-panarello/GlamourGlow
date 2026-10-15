@@ -106,7 +106,7 @@ stateDiagram-v2
     }
 
 ```
-
+### 6.2 Sessione Utente e Autenticazione
 ```mermaid
 
 stateDiagram-v2
@@ -128,11 +128,13 @@ stateDiagram-v2
             H --> RuoloCliente
 
             RuoloCliente --> RuoloCliente : ricaricaWallet(importo) / incrementaSaldo()
-            RuoloCliente --> RuoloAmministratore : verificaRuolo() [eAmministratore]
-            RuoloAmministratore --> RuoloCliente : passaAVistaCliente() [eCliente]
+            RuoloCliente --> RuoloAmministratore : verificaRuolo() [isAmministratore]
+            RuoloAmministratore --> RuoloCliente : tornaAllaVetrina() [isCliente]
         }
     }
 ```
+
+### 6.3 Gestione Catalogo
 ```mermaid
 
 stateDiagram-v2
@@ -143,11 +145,12 @@ stateDiagram-v2
     state GestioneCatalogo {
         [*] --> ConsultaCatalogo
 
-        ConsultaCatalogo --> DettaglioProdotto : selezionaProdotto(idProdotto) / caricaDettaglio()
+        ConsultaCatalogo --> DettaglioProdotto : selezionaProdotto(idProdotto) / caricaSchedaProdotto()
+        DettaglioProdotto --> ConsultaCatalogo : tornaAlCatalogo() / ripristinaFiltri()
         DettaglioProdotto --> ConsultaCatalogo : cercaProdotti(chiave) / applicaFiltri()
 
-        ConsultaCatalogo --> AggiornamentoScorte : modificaProdotto(idProdotto) [eAmministratore] / caricaModifica()
-        AggiornamentoScorte --> ConsultaCatalogo : salvaGiacenza(nuovaQuantita) / aggiornaDatabase()
+        ConsultaCatalogo --> ModificaProdotto : selezionaModifica(idProdotto) [isAmministratore] / caricaFormModifica()
+        ModificaProdotto --> ConsultaCatalogo : salvaProdotto(datiProdotto) / aggiornaDatabase()
     }
 ```
 
