@@ -153,4 +153,198 @@ stateDiagram-v2
         ModificaProdotto --> ConsultaCatalogo : salvaProdotto(datiProdotto) / aggiornaDatabase()
     }
 ```
+## 7. Modellazione Dinamica con DFD
 
+### 7.1 DFD DI PRIMO LIVELLO 
+```mermaid
+graph TD
+    classDef entity fill:#e1f5fe,stroke:#0288d1,stroke-width:2px,rx:0,ry:0;
+    classDef process fill:#fff3e0,stroke:#f57c00,stroke-width:2px,rx:30,ry:30;
+    classDef store fill:#e8f5e9,stroke:#388e3c,stroke-width:2px;
+
+    %% Entità Esterne
+    Cliente[ENTITÀ: Cliente]:::entity
+    Admin[ENTITÀ: Amministratore]:::entity
+
+    %% Processi
+    P1((1.0 VETRINA & RICERCA)):::process
+    P2((2.0 AUTENTICAZIONE & AREA UTENTE)):::process
+    P3((3.0 CARRELLO, CHECKOUT & WALLET)):::process
+    P4((4.0 PANNELLO AMMINISTRATORE)):::process
+
+    %% Archivi Dati
+    D1[(D1: Utenti & Wallet)]:::store
+    D2[(D2: Prodotti & Stock)]:::store
+    D3[(D3: Ordini)]:::store
+    D4[(D4: Coupon)]:::store
+
+    %% Flussi Cliente
+    Cliente -->|Filtri & Ricerca| P1
+    P1 -->|Catalogo & Dettaglio Prodotto| Cliente
+
+    Cliente -->|Credenziali & Ricarica| P2
+    P2 -->|Esito Login & Saldo| Cliente
+
+    Cliente -->|Prodotti Scelti & Coupon| P3
+    P3 -->|Conferma Ordine & Ricevuta| Cliente
+
+    %% Flussi Admin
+    Admin -->|Gestione Prodotti & Coupon| P4
+    P4 -->|Report & Esito Operazioni| Admin
+
+    %% Flussi verso/da Archivi (Solo Frecce Singole)
+    D2 -->|Dati Prodotti & Prezzi| P1
+
+    D1 -->|Dati Utente & Saldo| P2
+    P2 -->|Aggiornamento Credito| D1
+
+    D2 -->|Listino & Giacenza Stock| P3
+    D4 -->|Dati Sconto Coupon| P3
+    D1 -->|Verifica Saldo| P3
+    P3 -->|Addebito Credito| D1
+    P3 -->|Scalo Stock Magazzino| D2
+    P3 -->|Registrazione Nuovo Ordine| D3
+
+    P4 -->|Modifica Catalogo| D2
+    P4 -->|Inserimento Coupon| D4
+    P4 -->|Gestione Utenti| D1
+    P4 -->|Update Stato Ordini| D3
+```
+### 7.2 DFD di Livello 2 (Raffinamento Checkout & Wallet)
+```mermaid
+graph TD
+    classDef entity fill:#e1f5fe,stroke:#0288d1,stroke-width:2px,rx:0,ry:0;
+    classDef process fill:#fff3e0,stroke:#f57c00,stroke-width:2px,rx:30,ry:30;
+    classDef store fill:#e8f5e9,stroke:#388e3c,stroke-width:2px;
+
+    %% Entità Esterna
+    Cliente[ENTITÀ: Cliente]:::entity
+
+    %% Sotto-processi del Checkout
+    P3_1((3.1 Gestione Carrello<br/>& Prezzo Lordo)):::process
+    P3_2((3.2 Verifica & Applicazione<br/>Sconto Coupon)):::process
+    P3_3((3.3 Verifica & Addebito<br/>Saldo Wallet)):::process
+    P3_4((3.4 Finalizzazione &<br/>Emissione Ricevuta)):::process
+
+    %% Archivi Dati
+    D2[(D2: Prodotti & Stock)]:::store
+    D4[(D4: Coupon)]:::store
+    D1[(D1: Utenti & Wallet)]:::store
+    D3[(D3: Ordini)]:::store
+
+    %% 1. FASE CARRELLO & PREZZO LORDO
+    Cliente -->|Selezione Prodotti & Quantità| P3_1
+    D2 -->|Prezzi Unitari & Giacenza| P3_1
+    P3_1 -->|Importo Lordo| P3_2
+
+    %% 2. FASE APPLICAZIONE COUPON
+    Cliente -->|Codice Coupon| P3_2
+    D4 -->|Dati Sconto & Validità| P3_2
+    P3_2 -->|Importo Totale Netto| P3_3
+
+    %% 3. FASE WALLET & PAGAMENTO
+    Cliente -->|Richiesta Ricarica Fondo| P3_3
+    D1 -->|Saldo Disponibile| P3_3
+    P3_3 -->|Addebito Saldo| D1
+    P3_3 -->|Esito Pagamento OK| P3_4
+
+    %% 4. FASE FINALIZZAZIONE & SCRITTURA DB
+    P3_4 -->|Scalo Quantità Stock| D2
+    P3_4 -->|Registrazione Dati Ordine| D3
+    P3_4 -->|Ricevuta & Conferma Acquisto| Cliente
+
+```
+### 7.3 DFD Livello 2 — Vetrina, Ricerca & Dettaglio
+```mermaid
+graph TD
+    classDef entity fill:#e1f5fe,stroke:#0288d1,stroke-width:2px,rx:0,ry:0;
+    classDef process fill:#fff3e0,stroke:#f57c00,stroke-width:2px,rx:30,ry:30;
+    classDef store fill:#e8f5e9,stroke:#388e3c,stroke-width:2px;
+
+    Cliente[ENTITÀ: Cliente]:::entity
+
+    P1_1((1.1 Filtro Categoria<br/>& Brand)):::process
+    P1_2((1.2 Ricerca Testuale<br/>& Parole Chiave)):::process
+    P1_3((1.3 Generazione Scheda<br/>Dettaglio Prodotto)):::process
+
+    D2[(D2: Prodotti & Stock)]:::store
+
+    %% Flussi Filtri
+    Cliente -->|Selezione Categoria / Brand| P1_1
+    D2 -->|Elenco Categorie & Marche| P1_1
+    P1_1 -->|Prodotti Filtrati| P1_3
+
+    %% Flussi Ricerca Testuale
+    Cliente -->|Stringa di Ricerca| P1_2
+    D2 -->|Indice Prodotti & Titoli| P1_2
+    P1_2 -->|Risultati Ricerca| P1_3
+
+    %% Flussi Scheda Prodotto
+    D2 -->|Scheda Tecnica, Prezzo & Stock| P1_3
+    P1_3 -->|Pagina Dettaglio Prodotto| Cliente
+```
+### 7.4 DFD Livello 2 — Autenticazione & Area Utente
+```mermaid
+graph TD
+    classDef entity fill:#e1f5fe,stroke:#0288d1,stroke-width:2px,rx:0,ry:0;
+    classDef process fill:#fff3e0,stroke:#f57c00,stroke-width:2px,rx:30,ry:30;
+    classDef store fill:#e8f5e9,stroke:#388e3c,stroke-width:2px;
+
+    Cliente[ENTITÀ: Cliente]:::entity
+
+    P2_1((2.1 Validazione<br/>Credenziali Login)):::process
+    P2_2((2.2 Gestione Sessione<br/>& Saldo Wallet)):::process
+    P2_3((2.3 Estrazione Storico<br/>Ordini Utente)):::process
+
+    D1[(D1: Utenti & Wallet)]:::store
+    D3[(D3: Ordini)]:::store
+
+    %% Login
+    Cliente -->|Email & Password| P2_1
+    D1 -->|Hash Password & Ruolo| P2_1
+    P2_1 -->|Esito Login OK| P2_2
+
+    %% Sessione e Credito
+    Cliente -->|Richiesta Saldo / Ricarica| P2_2
+    D1 -->|Saldo Wallet Attuale| P2_2
+    P2_2 -->|Update Ricarica Saldo| D1
+    P2_2 -->|Dati Profilo & Saldo| Cliente
+
+    %% Storico Ordini
+    Cliente -->|Richiesta Storico Acquisti| P2_3
+    D3 -->|Registro Ordini Utente| P2_3
+    P2_3 -->|Storico Ordini & Stati| Cliente
+```
+### 7.5 DFD Livello 2 — Pannello Amministratore
+```mermaid
+graph TD
+    classDef entity fill:#e1f5fe,stroke:#0288d1,stroke-width:2px,rx:0,ry:0;
+    classDef process fill:#fff3e0,stroke:#f57c00,stroke-width:2px,rx:30,ry:30;
+    classDef store fill:#e8f5e9,stroke:#388e3c,stroke-width:2px;
+
+    Admin[ENTITÀ: Amministratore]:::entity
+
+    P4_1((4.1 Gestione Catalogo<br/>& Giacenze Magazzino)):::process
+    P4_2((4.2 Generazione<br/>Codici Coupon)):::process
+    P4_3((4.3 Gestione & Cambio<br/>Stato Ordini)):::process
+
+    D2[(D2: Prodotti & Stock)]:::store
+    D4[(D4: Coupon)]:::store
+    D3[(D3: Ordini)]:::store
+
+    %% CRUD Prodotti
+    Admin -->|Nuovo Prodotto / Modifica Prezzo| P4_1
+    P4_1 -->|Scrittura / Update Catalogo| D2
+    P4_1 -->|Esito Operazione Catalogo| Admin
+
+    %% CRUD Coupon
+    Admin -->|Codice, % Sconto & Scadenza| P4_2
+    P4_2 -->|Inserimento Nuovo Coupon| D4
+    P4_2 -->|Conferma Attivazione Coupon| Admin
+
+    %% Gestione Ordini
+    Admin -->|ID Ordine & Nuovo Stato| P4_3
+    D3 -->|Stato Attuale Ordine| P4_3
+    P4_3 -->|Update Stato Ordine| D3
+    P4_3 -->|Conferma Aggiornamento| Admin
+```
